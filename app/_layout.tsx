@@ -1,31 +1,19 @@
 // template
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import SplashScreen from "react-native-splash-screen";
 import { ChatProvider } from "@/contexts/ChatContext";
 import { LLMProviderContext } from "@/contexts/LLMContext";
 import { MCPProvider } from "@/contexts/MCPContext";
 import { LocalLLMContext } from "@/contexts/LocalLLMContext";
 import { trpc, trpcClient } from "@/lib/trpc";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
 const queryClient = new QueryClient();
-
-function RootLayoutNav() {
-  return (
-    <Stack screenOptions={{ headerBackTitle: "Back" }}>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
-  );
-}
 
 export default function RootLayout() {
   useEffect(() => {
-    SplashScreen.hideAsync();
+    SplashScreen.hide();
   }, []);
 
   return (
@@ -36,7 +24,7 @@ export default function RootLayout() {
             <MCPProvider>
               <ChatProvider>
                 <GestureHandlerRootView>
-                  <RootLayoutNav />
+                  <RootNavigator />
                 </GestureHandlerRootView>
               </ChatProvider>
             </MCPProvider>

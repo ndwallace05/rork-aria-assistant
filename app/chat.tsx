@@ -13,7 +13,7 @@ import {
   Linking,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { ArrowLeft, Send, Mic, Camera, Image as ImageIcon, X, MicOff, Search, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react-native';
 import Colors from '@/constants/colors';
 import { useChat } from '@/contexts/ChatContext';
@@ -25,7 +25,7 @@ import { useImagePicker } from '@/hooks/useImagePicker';
 import { useWebSearch } from '@/hooks/useWebSearch';
 
 export default function ChatScreen() {
-  const router = useRouter();
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const { currentConversation, sendMessage, isLoading } = useChat();
   const llm = useLLM();
@@ -55,7 +55,7 @@ export default function ChatScreen() {
           <Text style={styles.errorSubtext}>Can&apos;t help if you don&apos;t tell me what we&apos;re doing.</Text>
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() => router.back()}
+            onPress={() => navigation.goBack()}
           >
             <Text style={styles.backButtonText}>Go Back</Text>
           </TouchableOpacity>
@@ -249,7 +249,7 @@ export default function ChatScreen() {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.headerButton}
-          onPress={() => router.back()}
+          onPress={() => navigation.goBack()}
         >
           <ArrowLeft size={24} color={Colors.text} />
         </TouchableOpacity>

@@ -12,7 +12,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { Info, Database, Shield, Key, Check, X, ExternalLink, ChevronRight, ChevronDown, ChevronUp, RefreshCw, Search, Download } from 'lucide-react-native';
 import Colors from '@/constants/colors';
 
@@ -24,7 +24,7 @@ import type { LLMProvider } from '@/types/llm';
 
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
-  const router = useRouter();
+  const navigation = useNavigation();
 
   const llm = useLLM();
   const localLLM = useLocalLLM();
@@ -233,7 +233,7 @@ export default function SettingsScreen() {
                   <View style={styles.providerActions}>
                     <TouchableOpacity
                       style={styles.manageModelsButton}
-                      onPress={() => router.push('/local-models')}
+                      onPress={() => navigation.navigate('local-models' as any)}
                     >
                       <Download size={16} color={Colors.primary} />
                       <Text style={styles.manageModelsButtonText}>

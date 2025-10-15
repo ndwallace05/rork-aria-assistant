@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,13 +9,14 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { Stack, router } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { Plus, Server, Power, Trash2, Settings as SettingsIcon, Search, Zap } from 'lucide-react-native';
 import { useMCP } from '@/contexts/MCPContext';
 import Colors from '@/constants/colors';
 import { POPULAR_MCP_SERVERS } from '@/constants/mcpServers';
 
 export default function MCPScreen() {
+  const navigation = useNavigation();
   const mcp = useMCP();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showPopular, setShowPopular] = useState<boolean>(true);
@@ -197,24 +198,24 @@ export default function MCPScreen() {
     );
   };
 
+  useEffect(() => {
+    navigation.setOptions({
+      title: 'MCP Servers',
+      headerStyle: { backgroundColor: Colors.surface },
+      headerTintColor: Colors.text,
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('add-mcp-server' as any)}
+          style={styles.headerButton}
+        >
+          <Plus size={24} color={Colors.primary} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
-      <Stack.Screen
-        options={{
-          title: 'MCP Servers',
-          headerStyle: { backgroundColor: Colors.surface },
-          headerTintColor: Colors.text,
-          headerRight: () => (
-            <TouchableOpacity
-              onPress={() => router.push('/add-mcp-server')}
-              style={styles.headerButton}
-            >
-              <Plus size={24} color={Colors.primary} />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-
       <View style={styles.searchContainer}>
         <Search size={20} color={Colors.textSecondary} style={styles.searchIcon} />
         <TextInput
@@ -229,7 +230,7 @@ export default function MCPScreen() {
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <TouchableOpacity
           style={styles.addCustomCard}
-          onPress={() => router.push('/add-mcp-server')}
+          onPress={() => navigation.navigate('add-mcp-server' as any)}
         >
           <View style={styles.addCustomHeader}>
             <View style={styles.addCustomIcon}>

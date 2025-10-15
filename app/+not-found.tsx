@@ -1,21 +1,20 @@
 // template
-import { Link, Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Colors from "@/constants/colors";
 
 export default function NotFoundScreen() {
-  return (
-    <>
-      <Stack.Screen options={{ title: "Not Found" }} />
-      <View style={styles.container}>
-        <Text style={styles.title}>Page not found</Text>
-        <Text style={styles.description}>The page you are looking for does not exist.</Text>
+  const navigation = useNavigation();
 
-        <Link href="/" style={styles.link}>
-          <Text style={styles.linkText}>Go back home</Text>
-        </Link>
-      </View>
-    </>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Page not found</Text>
+      <Text style={styles.description}>The page you are looking for does not exist.</Text>
+
+      <TouchableOpacity onPress={() => navigation.navigate('(main)' as any)} style={styles.link}>
+        <Text style={styles.linkText}>Go back home</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,13 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { Stack, router } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { useMCP } from '@/contexts/MCPContext';
 import Colors from '@/constants/colors';
 import type { MCPTransportType } from '@/types/mcp';
 
 export default function AddMCPServerScreen() {
+  const navigation = useNavigation();
   const mcp = useMCP();
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -55,20 +56,20 @@ export default function AddMCPServerScreen() {
 
     mcp.addServer(serverData);
     Alert.alert('Success', 'Server added successfully', [
-      { text: 'OK', onPress: () => router.back() },
+      { text: 'OK', onPress: () => navigation.goBack() },
     ]);
   };
 
+  useEffect(() => {
+    navigation.setOptions({
+      title: 'Add MCP Server',
+      headerStyle: { backgroundColor: Colors.surface },
+      headerTintColor: Colors.text,
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
-      <Stack.Screen
-        options={{
-          title: 'Add MCP Server',
-          headerStyle: { backgroundColor: Colors.surface },
-          headerTintColor: Colors.text,
-        }}
-      />
-
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.section}>
           <Text style={styles.label}>Server Name *</Text>
