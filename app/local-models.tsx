@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import {
   ArrowLeft,
   Download,
@@ -27,7 +27,7 @@ import { LOCAL_LLM_MODELS } from '@/constants/localModels';
 import type { LocalLLMModel } from '@/types/localLLM';
 
 export default function LocalModelsScreen() {
-  const router = useRouter();
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const localLLM = useLocalLLM();
   const [storageInfo, setStorageInfo] = useState<{ used: number; available: number; total: number } | null>(null);
@@ -226,7 +226,7 @@ export default function LocalModelsScreen() {
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <ArrowLeft size={24} color={Colors.text} />
         </TouchableOpacity>
         <View style={styles.headerInfo}>

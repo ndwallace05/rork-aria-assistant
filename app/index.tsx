@@ -1,5 +1,13 @@
-import { Redirect } from 'expo-router';
+import React, { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { View } from 'react-native';
 
 export default function Index() {
-  return <Redirect href="/(tabs)/chats" />;
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.navigate('(main)');
+  }, [navigation]);
+
+  return <View />;
 }

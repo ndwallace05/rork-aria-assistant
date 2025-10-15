@@ -8,7 +8,7 @@ import {
   TextInput,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { Plus, Search, MessageSquare, Pin, Trash2 } from 'lucide-react-native';
 import Colors from '@/constants/colors';
 import { useChat } from '@/contexts/ChatContext';
@@ -16,7 +16,7 @@ import type { Conversation } from '@/types/chat';
 import { AI_MODELS } from '@/constants/models';
 
 export default function ChatsScreen() {
-  const router = useRouter();
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const { conversations, createConversation, selectConversation, deleteConversation, togglePinConversation } = useChat();
   const [searchQuery, setSearchQuery] = useState('');
@@ -34,12 +34,12 @@ export default function ChatsScreen() {
   const handleNewChat = () => {
     const id = createConversation();
     selectConversation(id);
-    router.push('/chat' as any);
+    navigation.navigate('chat');
   };
 
   const handleSelectChat = (conversation: Conversation) => {
     selectConversation(conversation.id);
-    router.push('/chat' as any);
+    navigation.navigate('chat' as any);
   };
 
   const getModelInfo = (modelId: string) => {
