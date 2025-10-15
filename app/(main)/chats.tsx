@@ -34,7 +34,7 @@ export default function ChatsScreen() {
   const handleNewChat = () => {
     const id = createConversation();
     selectConversation(id);
-    navigation.navigate('chat' as any);
+    navigation.navigate('chat');
   };
 
   const handleSelectChat = (conversation: Conversation) => {
