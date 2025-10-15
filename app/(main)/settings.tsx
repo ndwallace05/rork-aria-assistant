@@ -233,7 +233,7 @@ export default function SettingsScreen() {
                   <View style={styles.providerActions}>
                     <TouchableOpacity
                       style={styles.manageModelsButton}
-                      onPress={() => navigation.navigate('local-models' as any)}
+                      onPress={() => navigation.navigate('local-models')}
                     >
                       <Download size={16} color={Colors.primary} />
                       <Text style={styles.manageModelsButtonText}>
