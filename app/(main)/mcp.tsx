@@ -205,7 +205,7 @@ export default function MCPScreen() {
       headerTintColor: Colors.text,
       headerRight: () => (
         <TouchableOpacity
-          onPress={() => navigation.navigate('add-mcp-server' as any)}
+          onPress={() => navigation.navigate('add-mcp-server')}
           style={styles.headerButton}
         >
           <Plus size={24} color={Colors.primary} />
