@@ -11,7 +11,7 @@ export default function NotFoundScreen() {
       <Text style={styles.title}>Page not found</Text>
       <Text style={styles.description}>The page you are looking for does not exist.</Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate('(main)' as any)} style={styles.link}>
+      <TouchableOpacity onPress={() => navigation.navigate('(main)')} style={styles.link}>
         <Text style={styles.linkText}>Go back home</Text>
       </TouchableOpacity>
     </View>
