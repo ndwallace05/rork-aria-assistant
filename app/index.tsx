@@ -6,7 +6,7 @@ export default function Index() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    navigation.navigate('(main)' as any);
+    navigation.navigate('(main)');
   }, [navigation]);
 
   return <View />;
